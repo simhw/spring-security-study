@@ -17,7 +17,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/member/signup").permitAll()  // 회원가입
+                        .requestMatchers("/", "/member/signup").permitAll()  // 회원가입
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin   // 로그인
@@ -25,6 +25,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/member/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
+                        .successHandler(new AuthenticationSuccessHandlerImpl())
                         .failureUrl("/member/login?error=true")
                         .permitAll()
                 )
