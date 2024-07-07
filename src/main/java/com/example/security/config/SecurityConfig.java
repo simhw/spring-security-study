@@ -7,26 +7,30 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/member/signup").permitAll()  // 회원가입
+                        .requestMatchers("/", "/member/new").permitAll()  // 회원가입
                         .anyRequest().authenticated()
                 )
-                .formLogin(formLogin -> formLogin   // 로그인
+                .formLogin(form -> form   // 로그인
                         .loginPage("/member/login")
                         .loginProcessingUrl("/member/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .successHandler(new AuthenticationSuccessHandlerImpl())
-                        .failureUrl("/member/login?error=true")
+                        //.successHandler(new AuthenticationSuccessHandlerImpl())
+                        .defaultSuccessUrl("/")
+                        .failureUrl("/member/login?error")
                         .permitAll()
                 )
                 .logout(logout -> logout    // 로그아웃

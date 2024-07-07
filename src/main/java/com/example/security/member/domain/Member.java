@@ -27,9 +27,13 @@ public class Member {
     public Member() {
     }
 
-    public Member(String email, String password, String name, String address) {
+    public Member(String email, String password, String name) {
         this.email = email;
         this.password = password;
+        this.name = name;
+    }
+
+    public void update(String name, String address) {
         this.name = name;
         this.address = address;
     }
