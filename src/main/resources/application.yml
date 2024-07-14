@@ -13,7 +13,7 @@ spring:
       password:
   session:
     redis:
-      namespace: spring:session
+      namespace: security:session
   jpa:
     hibernate:
       ddl-auto: update
