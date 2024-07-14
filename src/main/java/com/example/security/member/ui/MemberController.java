@@ -21,5 +21,8 @@ public class MemberController {
         return "member/login";
     }
 
-
+    @GetMapping("/member/logout")
+    public String logout() {
+        return "member/logout";
+    }
 }

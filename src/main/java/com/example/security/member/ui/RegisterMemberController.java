@@ -3,6 +3,7 @@ package com.example.security.member.ui;
 import com.example.security.member.application.dto.RegisterMemberRequest;
 import com.example.security.member.application.RegisterMemberService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

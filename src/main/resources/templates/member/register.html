@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>회원가입</h1>
-<form th:object="${request}" th:action="@{/member/register}" method="post">
+<form th:object="${request}" th:action="@{/member/new}" method="post">
     <div>
         <label for="email">이메일</label>
         <input type="email" id=email th:field="*{email}" placeholder="이메일" required/>

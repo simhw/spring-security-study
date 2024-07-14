@@ -7,14 +7,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain1(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
@@ -28,8 +28,8 @@ public class SecurityConfig {
                         .loginProcessingUrl("/member/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        //.successHandler(new AuthenticationSuccessHandlerImpl())
                         .defaultSuccessUrl("/")
+                        //.successHandler(new AuthenticationSuccessHandlerImpl())
                         .failureUrl("/member/login?error")
                         .permitAll()
                 )
@@ -39,6 +39,15 @@ public class SecurityConfig {
                         .permitAll()
                 );
 
+        return http.build();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain2(HttpSecurity http) throws Exception {
+        http
+                .securityContext((context) -> context
+                        .securityContextRepository(new SecurityContextRepositoryImpl())
+                );
         return http.build();
     }
 
