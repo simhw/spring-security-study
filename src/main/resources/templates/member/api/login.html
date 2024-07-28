@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>LOGIN</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#form").submit(function (event) {
+                event.preventDefault(); // 기본 폼 제출을 막음
+
+                var request = {
+                    username: $("#email").val(),
+                    password: $("#password").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/member/login",
+                    contentType: "application/json",
+                    data: JSON.stringify(request),
+                    success: function (response) {
+                        alert("SUCCESS");
+                        window.location.href = "/home";
+                    },
+                    error: function (xhr, status, error) {
+                        alert("FAIL: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>로그인</h1>
+<form id="form">
+    <div>
+        <label for="email">이메일</label>
+        <input type="text" id="email" name="email" placeholder="이메일"/>
+    </div>
+    <div>
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" placeholder="비밀번호"/>
+    </div>
+    <div>
+        <button type="submit">로그인</button>
+    </div>
+    <div id="error" style="color: red;"></div>
+</form>
+</body>
+</html>

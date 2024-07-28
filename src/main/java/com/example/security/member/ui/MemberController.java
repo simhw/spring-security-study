@@ -1,27 +1,37 @@
 package com.example.security.member.ui;
 
-import com.example.security.member.application.RegisterMemberService;
+import com.example.security.member.application.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
-    @GetMapping("/")
-    public String home() {
-        return "home";
+    @GetMapping("/endpoint")
+    public String endpoint() {
+        return "endpoint";
     }
 
-    @GetMapping("/member/login")
+    @GetMapping("/")
+    public String home(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        if (userDetails == null) {
+            return "anonymous-index";
+        }
+        model.addAttribute("user", userDetails);
+        return "index";
+    }
+
+    @GetMapping("/login")
     public String login() {
         return "member/login";
     }
 
-    @GetMapping("/member/logout")
+    @GetMapping("/logout")
     public String logout() {
         return "member/logout";
     }
