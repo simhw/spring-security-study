@@ -1,4 +1,4 @@
-package com.example.security.member.application;
+package com.example.security.auth.application;
 
 import com.example.security.member.domain.Member;
 import lombok.Getter;

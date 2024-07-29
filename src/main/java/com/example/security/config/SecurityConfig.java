@@ -1,6 +1,6 @@
 package com.example.security.config;
 
-import com.example.security.member.application.OAuth2UserServiceImpl;
+import com.example.security.auth.application.CustOAuth2UserService;
 import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfig {
 
     @Autowired
-    OAuth2UserServiceImpl oAuth2UserService;
+    CustOAuth2UserService oAuth2UserService;
 
     @Bean
     @Order(1)
@@ -53,7 +53,6 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-
                         .failureUrl("/login?error")
                         .permitAll()
                 )
@@ -65,9 +64,9 @@ public class SecurityConfig {
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
                         .defaultSuccessUrl("/")
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(oAuth2UserService))
+                        .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserService))
                 );
+
         return http.build();
     }
 

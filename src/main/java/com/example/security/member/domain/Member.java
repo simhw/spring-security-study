@@ -21,11 +21,9 @@ public class Member {
     @Comment("비밀번호")
     private String password;
 
-    @Comment("OAuth 공급자")
-    private String oauthProvider;
+    private String snsType;
 
-    @Comment("OAuth 아이디")
-    private String oauthId;
+    private String snsId;
 
     private String name;
 
@@ -40,10 +38,10 @@ public class Member {
         this.name = name;
     }
 
-    public Member(String email, String oauthProvider, String oauthId, String name) {
+    public Member(String snsType, String snsId, String email, String name) {
+        this.snsType = snsType;
+        this.snsId = snsId;
         this.email = email;
-        this.oauthProvider = oauthProvider;
-        this.oauthId = oauthId;
         this.name = name;
     }
 

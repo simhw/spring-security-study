@@ -1,7 +1,7 @@
 package com.example.security.member.ui;
 
+import com.example.security.auth.application.UserDetailsImpl;
 import com.example.security.member.application.*;
-import com.example.security.member.application.dto.RegisterMemberRequest;
 import com.example.security.member.application.dto.UpdateMemberRequest;
 import com.example.security.member.domain.Member;
 import com.example.security.member.domain.MemberRepository;
