@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-    @GetMapping("/endpoint")
-    public String endpoint() {
-        return "endpoint";
-    }
-
     @GetMapping("/")
     public String home(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
         if (userDetails == null) {

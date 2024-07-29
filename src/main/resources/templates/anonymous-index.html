@@ -5,7 +5,7 @@
 <body>
 <h1>홈</h1>
 <div sec:authorize="isAnonymous()">
-    <a th:href="@{/new}">회원가입</a>
+    <a th:href="@{/member/new}">회원가입</a>
     <a th:href="@{/login}">로그인</a>
 </div>
 <div sec:authorize="isAuthenticated()">
@@ -23,10 +23,8 @@
             <td><span sec:authentication="principal.id"></span></td>
         </tr>
     </table>
-
     <a th:href="@{/member/update}">회원수정</a>
-    <a th:href="@{/member/logout}">로그아웃</a>
+    <a th:href="@{/logout}">로그아웃</a>
 </div>
-
 </body>
 </html>
