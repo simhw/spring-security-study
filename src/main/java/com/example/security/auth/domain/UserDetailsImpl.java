@@ -1,4 +1,4 @@
-package com.example.security.auth.application;
+package com.example.security.auth.domain;
 
 import com.example.security.member.domain.Member;
 import lombok.Getter;
@@ -18,6 +18,7 @@ public class UserDetailsImpl implements UserDetails, OAuth2User {
     private final String username;
     private final String password;
     private final List<GrantedAuthority> authorities;
+
     private Map<String, Object> attributes;
 
     public UserDetailsImpl(Member member) {
@@ -35,18 +36,6 @@ public class UserDetailsImpl implements UserDetails, OAuth2User {
         this.attributes = attributes;
     }
 
-    // OAuth2User
-    @Override
-    public Map<String, Object> getAttributes() {
-        return this.attributes;
-    }
-
-    @Override
-    public String getName() {
-        return this.username;
-    }
-
-    // UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
@@ -74,4 +63,13 @@ public class UserDetailsImpl implements UserDetails, OAuth2User {
         return UserDetails.super.isEnabled();
     }
 
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.attributes;
+    }
+
+    @Override
+    public String getName() {
+        return this.username;
+    }
 }

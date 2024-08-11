@@ -1,4 +1,4 @@
-package com.example.security.config;
+package com.example.security.config.security;
 
 import com.example.security.auth.application.CustOAuth2UserService;
 import jakarta.servlet.DispatcherType;
@@ -21,7 +21,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfig {
 
     @Autowired
-    CustOAuth2UserService oAuth2UserService;
+    CustOAuth2UserService custOAuth2UserService;
 
     @Bean
     @Order(1)
@@ -65,7 +65,7 @@ public class SecurityConfig {
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
                         .defaultSuccessUrl("/")
-                        .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserService))
+                        .userInfoEndpoint(userInfo -> userInfo.userService(custOAuth2UserService))
                 );
 
         return http.build();

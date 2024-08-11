@@ -1,6 +1,6 @@
 package com.example.security.member.ui;
 
-import com.example.security.auth.application.UserDetailsImpl;
+import com.example.security.auth.domain.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
