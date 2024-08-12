@@ -18,7 +18,6 @@ public class UserDetailsImpl implements UserDetails, OAuth2User {
     private final String username;
     private final String password;
     private final List<GrantedAuthority> authorities;
-
     private Map<String, Object> attributes;
 
     public UserDetailsImpl(Member member) {
